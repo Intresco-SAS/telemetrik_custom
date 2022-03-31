@@ -1,11 +1,37 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo.exceptions import ValidationError
+from odoo import models, fields, api, _
 
 
 class AccountAnalyticTag(models.Model):
     _inherit = 'account.analytic.tag'
 
     hours = fields.Integer(string='Hours', default=120)
+
+    def write(self, vals):
+        res = super(AccountAnalyticTag, self).write(vals)
+        for tag in self:
+            if tag.active_analytic_distribution:
+                total_worked_hours = sum(tag.analytic_distribution_ids.mapped('worked_hours'))
+                total_percentage = sum(tag.analytic_distribution_ids.mapped('percentage'))
+                total_percentage_1 = round(sum(tag.analytic_distribution_ids.mapped('percentage')))
+                if total_worked_hours != tag.hours or total_percentage_1 != 100:
+                    msg = "Total worked hours %s not matched with %s OR total percentage %s not match with 100" % (str(total_worked_hours), str(tag.hours), str(total_percentage))
+                    raise ValidationError(_(msg))
+        return res
+
+    @api.model
+    def create(self, vals):
+        res = super(AccountAnalyticTag, self).create(vals)
+        for tag in res:
+            if tag.active_analytic_distribution:
+                total_worked_hours = sum(tag.analytic_distribution_ids.mapped('worked_hours'))
+                total_percentage = sum(tag.analytic_distribution_ids.mapped('percentage'))
+                total_percentage_1 = round(sum(tag.analytic_distribution_ids.mapped('percentage')))
+                if total_worked_hours != tag.hours or total_percentage_1 != 100:
+                    msg = "Total worked hours %s not matched with %s OR total percentage %s not match with 100" % (str(total_worked_hours), str(tag.hours), str(total_percentage))
+                    raise ValidationError(_(msg))
+        return res
 
 
 class AccountAnalyticDistribution(models.Model):
