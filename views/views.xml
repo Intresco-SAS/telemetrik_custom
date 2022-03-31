@@ -1,5 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-        
+        <record id="account_analytic_tag_form_view_inh_telemetrik_custom" model="ir.ui.view">
+            <field name="name">account.analytic.tag.form.inh.telemetrik_custom</field>
+            <field name="model">account.analytic.tag</field>
+            <field name="inherit_id" ref="analytic.account_analytic_tag_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="hours"/>
+                </xpath>
+                <xpath expr="//field[@name='analytic_distribution_ids']/tree/field[@name='percentage']" position="attributes">
+                    <attribute name='sum'>Total Percentage</attribute>
+                    <attribute name='digits'>[42,10]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='analytic_distribution_ids']/tree/field[@name='percentage']" position="before">
+                    <field name="worked_hours" sum="Total Worked Hours" context="{'hours': parent.hours}"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
