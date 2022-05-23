@@ -24,7 +24,7 @@
                   action="analytic.account_analytic_tag_action"
                   parent="hr_timesheet.menu_hr_time_tracking"/>
                   
-        <menuitem id="menu_analytic_tag_timesheets" 
+        <menuitem id="menu_overtime_timesheets" 
                   name="Solicitud de Horas Extra"
                   action="bi_hr_overtime_request_comm.overtime_req_action"
                   parent="hr_timesheet.menu_hr_time_tracking"/>
