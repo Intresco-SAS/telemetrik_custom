@@ -7,6 +7,7 @@ class AccountAnalyticTag(models.Model):
     _inherit = 'account.analytic.tag'
 
     hours = fields.Integer(string='Hours', default=120)
+    analytic_distribution_ids = fields.One2many(copy=True) #Se edita el campo para poder duplicar la tabla con todos los valores
 
     def write(self, vals):
         res = super(AccountAnalyticTag, self).write(vals)
