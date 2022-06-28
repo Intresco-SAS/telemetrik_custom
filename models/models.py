@@ -45,3 +45,8 @@ class AccountAnalyticDistribution(models.Model):
             self.percentage = self.worked_hours / self.tag_id.hours * 100
         if self.worked_hours and not self.tag_id and self._context.get('hours'):
             self.percentage = self.worked_hours / self._context.get('hours') * 100
+
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
+
+    x_producer = fields.Char(string='Fabricante')
