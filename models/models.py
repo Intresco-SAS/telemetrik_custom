@@ -51,3 +51,21 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     x_producer = fields.Char(string='Fabricante')
+
+class AccountMoveLine(models.Model):
+    _inherit = "account.move.line"
+    _description = "Category on Table"
+
+    x_category = fields.Many2one('product.category', string='Category',readonly=True)
+    
+    @api.model
+    def default_get(self, fields):
+        res = super(AccountMoveLine, self).default_get(fields)
+        
+        if self.product_id and self.move_id.move_type == 'in_invoice' and self.product_id.product_tmpl_id.categ_id :
+            self.x_category = self.product_id.product_tmpl_id.categ_id.id
+        
+        if self.product_id and self.move_id.move_type == 'out_invoice' and self.product_id.product_tmpl_id.categ_id :
+            self.x_category = self.product_id.product_tmpl_id.categ_id.id
+        
+        return res
