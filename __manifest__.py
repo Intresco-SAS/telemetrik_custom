@@ -10,5 +10,6 @@
     'depends': ['analytic','bi_hr_overtime_request_comm'],
     'data': [
         'views/views.xml',
+        'views/purchase_order_custom.xml',
     ],
 }
