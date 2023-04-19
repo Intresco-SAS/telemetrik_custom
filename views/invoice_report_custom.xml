@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="address_header_inherit" inherit_id="l10n_co_tax_extension.external_layout_document_inherit">
+            <xpath expr="//div[@name='header_co']" position="replace">
+                <div name="header_co" class="row" style="border: 1px solid black">      
+		            <div name="logo" class="col-5">
+		                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 100px;margin-top:20px" alt="Logo"/>
+		            </div>
+		                   
+		            <div class="col-7 text-left" style="font-size:17px;text-transform: uppercase">    
+		            	<t t-if="company.partner_id.companyBrandName">
+                            <strong t-field="company.partner_id.companyBrandName"/><br/>
+                            <span t-field="company.partner_id.companyName"/><br/>
+                        </t>
+                        <t t-else="">
+                            <strong t-field="company.partner_id.companyName"/><br/>
+                        </t>
+		                <t t-if="company.partner_id.doctype == '31'"><span>NIT: </span></t>
+                        <t t-if="company.partner_id.doctype == '13'"><span>C.C.: </span></t>
+                        <span t-field="company.partner_id.formatedNit"/><br/>
+                        <t t-if="company.fiscal_reponsability"><span t-field="company.fiscal_reponsability"/></t> <br/>
+		                <t t-if="company.partner_id.street"><span>DIR.: </span> <span t-field="company.partner_id.street"/></t><br/> 
+		                <t t-if="company.partner_id.mobile or company.partner_id.phone"><span>Tel.:<span t-field="company.partner_id.mobile"/> |<span t-field="company.phone"/></span><br/></t>
+                        <span>No Somos Autorretenedores</span><br/>
+                        <span>No Somos Grandes Contribuyentes</span>
+		            </div>
+	        	</div>
+            </xpath>
+		</template>
+        <template id="term_id_inherit" inherit_id="l10n_co_e-invoice.report_invoice_document_inherit">
+            <xpath expr="//span[@name='term_id']" position="replace">
+                <span name="term_id" align="justify" t-if="o.move_type == 'out_invoice' and not o.is_support_document">
+                    Esta factura de venta se asimila en todos sus efectos legales a un titulo valor según la ley 1231 de Julio de 2008.
+                    <t t-if="o.partner_bank_id.acc_number">
+                      Favor consignar a Cuenta de Corriente
+                      <strong t-field="o.partner_bank_id.acc_number"/>,<strong t-field="o.partner_bank_id.bank_id.name"/>
+                    </t>
+                  </span>
+            </xpath>
+        </template>
+    </data>
+</odoo>

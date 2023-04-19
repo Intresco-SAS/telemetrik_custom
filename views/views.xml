@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
+        
         <record id="account_analytic_tag_form_view_inh_telemetrik_custom" model="ir.ui.view">
             <field name="name">account.analytic.tag.form.inh.telemetrik_custom</field>
             <field name="model">account.analytic.tag</field>
@@ -39,6 +40,11 @@
                     <field name="x_category" string="Categoria" optional="hide" />
                 </xpath>
             </field>
+        </record>
+
+        <record id="l10n_co_e-invoice.email_template_edi_invoice_dian" model="mail.template">
+            <field name="email_from">${object.company_id.email}</field>
+            <field name="reply_to">${object.company_id.email}</field>
         </record>
 
         <menuitem id="menu_analytic_tag_timesheets" 

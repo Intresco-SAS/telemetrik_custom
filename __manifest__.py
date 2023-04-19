@@ -12,5 +12,6 @@
         'views/views.xml',
         'views/purchase_order_custom.xml',
         'views/purchase_quotation_co.xml',
+        'views/invoice_report_custom.xml',
     ],
 }
