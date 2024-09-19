@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
 		<template id="address_header_inherit" inherit_id="l10n_co_tax_extension.external_layout_document_inherit">
@@ -40,4 +40,4 @@
             </xpath>
         </template>
     </data>
-</odoo>
+</odoo> -->

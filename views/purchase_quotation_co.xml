@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-		<template id="purchasequotation_document_co_custom" inherit_id="payment_report_co.purchasequotation_document_co_inherit">
+		<template id="purchasequotation_document_co_custom" inherit_id="l10n_co_reports_int.purchasequotation_document_co_inherit">
             <xpath expr="//th[@name='th_description']" position="before">  
                 <th name="th_description"><strong>PRODUCTO</strong></th> 
             </xpath>
